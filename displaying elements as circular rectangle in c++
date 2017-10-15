@@ -1,0 +1,76 @@
+l state = 1 ;
+
+    l d = 0 ;
+    l left = 1 , right = n , up = 1 , down = n ;
+    j = 0 ;
+
+    while( 1 )
+    {
+        if( d + 1 > n * n )
+            break ;
+        //P( d ) ;
+        if( state == 1 )
+        {
+            rep( i , left , right )
+            {
+                if( d + 1 > n * n )
+                {
+                    d ++ ;
+                    break ;
+                }
+                a[up][i] = V[j] ;
+                j ++ ;
+                d ++ ;
+            }
+            up ++ ;
+            state = 2 ;
+        }
+        else if( state == 2 )
+        {
+            rep( i , up , down )
+            {
+                if( d + 1 > n * n )
+                {
+                    d ++ ;
+                    break ;
+                }
+                a[i][right] = V[j] ;
+                j ++ ;
+                d ++ ;
+            }
+            right -- ;
+            state = 3 ;
+        }
+        else if( state == 3 )
+        {
+            rev( i , right , left )
+            {
+                if( d + 1 > n * n )
+                {
+                    d ++ ;
+                    break ;
+                }
+                a[down][i] = V[j] ;
+                j ++ ;
+                d ++ ;
+            }
+            down -- ;
+            state = 4 ;
+        }
+        else{
+                //P( left ) ; sp ; P( down ) ;
+            rev( i , down , up )
+            {
+                if( d + 1 > n * n )
+                {
+                    d ++ ;
+                    break ;
+                }
+                a[i][left] = V[j] ;
+                j ++ ;
+                d ++ ;
+            }
+            left ++ ;
+            state = 1 ;
+        }
+    }
